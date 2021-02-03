@@ -13,7 +13,7 @@ def get_model(args):
 def get_transform(args):
     train_transform = []
     test_transform = []
-    if args.dataset == 'c10' or 'c100':
+    if args.dataset == 'c10' or args.dataset=='c100':
         train_transform.append(transforms.RandomCrop(size=args.size, padding=args.padding))
         train_transform.append(transforms.RandomHorizontalFlip())
 
@@ -39,7 +39,7 @@ def get_dataset(args):
         train_ds = torchvision.datasets.CIFAR10(root, train=True, transform=train_transform, download=True)
         test_ds = torchvision.datasets.CIFAR10(root, train=False, transform=test_transform, download=True)
 
-    if args.dataset == "c100":
+    elif args.dataset == "c100":
         args.num_classes=100
         args.size = 32
         args.padding = 4
