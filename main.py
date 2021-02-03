@@ -70,7 +70,7 @@ class Net(pl.LightningModule):
         return loss
 
 if __name__ == "__main__":
-    experiment_name = f"{args.model_name}"
+    experiment_name = f"{args.model_name}_{args.dataset}"
     logger = pl.loggers.CometLogger(
         api_key=args.api_key,
         save_dir="log",
@@ -81,3 +81,6 @@ if __name__ == "__main__":
     net = Net(args)
     trainer = pl.Trainer(fast_dev_run=args.dry_run, gpus=args.gpus, benchmark=args.benchmark, logger=logger, max_epochs=args.max_epochs, weights_summary="full", progress_bar_refresh_rate=0)
     trainer.fit(model=net, train_dataloader=train_dl, val_dataloaders=test_dl)
+    model_path = f"weights/{experiment_name}.pth"
+    torch.save(net.state_dict(), model_path)
+    logger.experiment.log_asset(file_name=experiment_name, file_data=model_path)

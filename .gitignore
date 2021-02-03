@@ -4,7 +4,9 @@
 /__pycache__
 /data/*
 /log/*
+/weights/*
 *.pyc
 
 !/data/.gitkeep
 !/log/.gitkeep
+!/weights/.gitkeep
