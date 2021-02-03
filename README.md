@@ -16,6 +16,7 @@ python main.py --api-key [YOUR API KEY OF COMET.ML]
 
 ## Dataset
 * CIFAR-10
+* CIFAR-100
 
 ## Version
 * Python: 3.6.9
