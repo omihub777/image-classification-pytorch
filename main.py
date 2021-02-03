@@ -11,7 +11,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--dataset", default="c10", type=str, help="[c10, c100]")
 parser.add_argument("--in-c", default=3, type=int)
 parser.add_argument("--num-classes", default=10, type=int)
-parser.add_argument("--model-name", default="preact18", help="[preact18, ]", type=str)
+parser.add_argument("--model-name", default="preact18", help="[preact18, preactse18]", type=str)
 parser.add_argument("--batch-size", default=128, type=int)
 parser.add_argument("--eval-batch-size", default=1024, type=int)
 parser.add_argument("--lr", default=1e-1, type=float)
@@ -81,6 +81,7 @@ if __name__ == "__main__":
     net = Net(args)
     trainer = pl.Trainer(fast_dev_run=args.dry_run, gpus=args.gpus, benchmark=args.benchmark, logger=logger, max_epochs=args.max_epochs, weights_summary="full", progress_bar_refresh_rate=0)
     trainer.fit(model=net, train_dataloader=train_dl, val_dataloaders=test_dl)
-    model_path = f"weights/{experiment_name}.pth"
-    torch.save(net.state_dict(), model_path)
-    logger.experiment.log_asset(file_name=experiment_name, file_data=model_path)
+    if not args.dry_run:
+        model_path = f"weights/{experiment_name}.pth"
+        torch.save(net.state_dict(), model_path)
+        logger.experiment.log_asset(file_name=experiment_name, file_data=model_path)

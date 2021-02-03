@@ -1,14 +1,18 @@
 import torchvision
 import torchvision.transforms as transforms
-from model.preact18 import PreAct18
 
 
 def get_model(args):
     if args.model_name == 'preact18':
+        from model.preact18 import PreAct18
         net = PreAct18(in_c=args.in_c, num_classes=args.num_classes)
-        return net
+    elif args.model_name=='preactse18':
+        from model.preactse18 import PreActSE18
+        net = PreActSE18(in_c=args.in_c, num_classes=args.num_classes, r=16)
     else:
         raise NotImplementedError(f"{model_name} is not implemented yet...")
+
+    return net
 
 def get_transform(args):
     train_transform = []
