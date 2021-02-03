@@ -1,0 +1,6 @@
+comet-ml
+pytorch-lightning==1.1.6
+torch
+torchsummary
+torchvision
+opencv-python
