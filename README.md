@@ -11,12 +11,22 @@ python main.py --api-key [YOUR API KEY OF COMET.ML]
 ```
 * [comet.ml](https://www.comet.ml/): Logger for this repository.(You need to register to get your own api key.)
 
-## Models
-* PreAct-ResNet18[[He, K.(ECCV'16)]](https://arxiv.org/abs/1603.05027)
-
 ## Dataset
 * CIFAR-10
 * CIFAR-100
 
 ## Version
 * Python: 3.6.9
+
+
+## Results(Accuracy)
+
+||CIFAR-10|CIFAR-100|
+|:--:|:--:|:--:|
+|[PreAct18](https://arxiv.org/abs/1603.05027)|||
+|[PreActSE18](https://arxiv.org/abs/1709.01507)|||
+
+
+## Models
+* PreAct-ResNet18[[He, K.(ECCV'16)]](https://arxiv.org/abs/1603.05027)
+* PreAct-ResNet18+SEModule[[Hu, J.(CVPR'18)]](https://arxiv.org/abs/1709.01507)
