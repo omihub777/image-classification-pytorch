@@ -2,26 +2,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torchsummary
-
-
-class ResBlock(nn.Module):
-    def __init__(self, in_c, out_c, k=3, s=1, p=1, bias=False):
-        super(ResBlock, self).__init__()
-        self.conv1 = nn.Conv2d(in_c, out_c, k, s, p, bias=bias)
-        self.bn1 = nn.BatchNorm2d(out_c)
-        self.conv2 = nn.Conv2d(out_c, out_c, k, 1, p, bias=bias)
-        self.bn2 = nn.BatchNorm2d(out_c)
-
-        if s!=1 or in_c!=out_c:
-            self.skip = nn.Conv2d(in_c, out_c, 1, s, bias=bias)
-        else:
-            self.skip = nn.Sequential()
-
-    def forward(self, x):
-        out = F.relu(self.bn1(self.conv1(x)))
-        out = self.bn2(self.conv2(out))
-        return F.relu(out+self.skip(x))
-        
+import sys, os
+sys.path.append(os.path.abspath("model"))
+from layers import ResBlock        
 
 class ResNet18(nn.Module):
     def __init__(self, in_c, num_classes):

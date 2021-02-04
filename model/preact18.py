@@ -2,28 +2,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torchsummary
-
-
-class PreActBlock(nn.Module):
-    """Modified PreAct: relu(bn(x)) is used for skip."""
-    def __init__(self, in_c, out_c, k=3, s=1, p=1, bias=False):
-        super(PreActBlock, self).__init__()
-        self.bn1 = nn.BatchNorm2d(in_c)
-        self.conv1 = nn.Conv2d(in_c, out_c, kernel_size=k, stride=s, padding=p, bias=bias)
-        self.bn2 = nn.BatchNorm2d(out_c)
-        self.conv2 = nn.Conv2d(out_c, out_c, kernel_size=k, stride=1, padding=p, bias=bias)
-
-        if s!=1 or in_c!=out_c:
-            self.skip = nn.Conv2d(in_c, out_c, kernel_size=1, stride=s, padding=0,bias=bias)
-        else:
-            self.skip = nn.Sequential()
-
-    def forward(self, x):
-        x = F.relu(self.bn1(x))
-        out = self.conv1(x)
-        out = self.conv2(F.relu(self.bn2(out)))
-
-        return out + self.skip(x)
+import sys, os
+sys.path.append(os.path.abspath("model"))
+from layers import PreActBlock
 
 class PreAct18(nn.Module):
     def __init__(self, in_c, num_classes, bias=False):

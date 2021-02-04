@@ -2,17 +2,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torchsummary
-
-
-class ConvBlock(nn.Module):
-    def __init__(self, in_c, out_c,k=3,s=1,p=1, bias=False):
-        super(ConvBlock, self).__init__()
-        self.conv = nn.Conv2d(in_c, out_c, kernel_size=k, stride=s, padding=p, bias=bias)
-        self.bn = nn.BatchNorm2d(out_c)
-
-    def forward(self, x):
-        out = F.relu(self.bn(self.conv(x)))
-        return out
+import sys, os
+sys.path.append(os.path.abspath("model"))
+from layers import ConvBlock
 
 class AllCNNC(nn.Module):
     def __init__(self, in_c, num_classes):
