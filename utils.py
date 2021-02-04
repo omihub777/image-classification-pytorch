@@ -18,6 +18,12 @@ def get_model(args):
     elif args.model_name=='preactse34':
         from model.preactse34 import PreActSE34
         net = PreActSE34(in_c=args.in_c, num_classes=args.num_classes, r=16)
+    elif args.model_name == 'preact50':
+        from model.preact50 import PreAct50
+        net = PreAct50(in_c=args.in_c, num_classes=args.num_classes)
+    elif args.model_name=='preactse50':
+        from model.preactse50 import PreActSE50
+        net = PreActSE50(in_c=args.in_c, num_classes=args.num_classes, r=16)
     elif args.model_name=='allcnnc':
         from model.allcnnc import AllCNNC
         net = AllCNNC(in_c=args.in_c, num_classes=args.num_classes)
