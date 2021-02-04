@@ -29,14 +29,15 @@ python main.py --api-key [YOUR API KEY OF COMET.ML]
 |[PreAct18](https://arxiv.org/abs/1603.05027)|94.575|75.415|11.2M|
 |[PreAct34](https://arxiv.org/abs/1603.05027)|-|-|21.3M|
 |[PreAct50](https://arxiv.org/abs/1603.05027)|-|-|23.5M|
-|[PreActSE18](https://arxiv.org/abs/1709.01507)|94.685|76.135|11.3M|
-|[PreActSE34](https://arxiv.org/abs/1709.01507)|-|-|21.4M|
-|[PreActSE50](https://arxiv.org/abs/1709.01507)|-|-|26.0M|
+|[SEPreAct18](https://arxiv.org/abs/1709.01507)|94.685|76.135|11.3M|
+|[SEPreAct34](https://arxiv.org/abs/1709.01507)|-|-|21.4M|
+|[SEPreAct50](https://arxiv.org/abs/1709.01507)|-|-|26.0M|
 |MobV1|-|-|-|
 |MobV2|-|-|-|
 |MNasNet|-|-|-|
 |EfficientNetB0|-|-|-|
 
+* Did experiments 2 times and report the averaged best accuracy.
 
 ## Hyperparameters
 |Params|Values|
@@ -55,4 +56,4 @@ python main.py --api-key [YOUR API KEY OF COMET.ML]
 * PreAct-ResNet+SEModule[[Hu, J.(CVPR'18)]](https://arxiv.org/abs/1709.01507)
 
 ## Miscellaneous
-* Shape of tensors right before GAP should be 4x4 rather than 2x2.
+* Spatial dimensions of tensors right before GAP should be 4x4 rather than 2x2.

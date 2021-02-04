@@ -6,24 +6,24 @@ def get_model(args):
     if args.model_name == 'preact18':
         from model.preact18 import PreAct18
         net = PreAct18(in_c=args.in_c, num_classes=args.num_classes)
-    elif args.model_name=='preactse18':
-        from model.preactse18 import PreActSE18
-        net = PreActSE18(in_c=args.in_c, num_classes=args.num_classes, r=16)
+    elif args.model_name=='sepreact18':
+        from model.sepreact18 import SEPreAct18
+        net = SEPreAct18(in_c=args.in_c, num_classes=args.num_classes, r=16)
     elif args.model_name=='resnet18':
         from model.resnet18 import ResNet18
         net = ResNet18(in_c=args.in_c, num_classes=args.num_classes)
     elif args.model_name == 'preact34':
         from model.preact34 import PreAct34
         net = PreAct34(in_c=args.in_c, num_classes=args.num_classes)
-    elif args.model_name=='preactse34':
-        from model.preactse34 import PreActSE34
-        net = PreActSE34(in_c=args.in_c, num_classes=args.num_classes, r=16)
+    elif args.model_name=='sepreact34':
+        from model.sepreact34 import SEPreAct34
+        net = SEPreAct34(in_c=args.in_c, num_classes=args.num_classes, r=16)
     elif args.model_name == 'preact50':
         from model.preact50 import PreAct50
         net = PreAct50(in_c=args.in_c, num_classes=args.num_classes)
-    elif args.model_name=='preactse50':
-        from model.preactse50 import PreActSE50
-        net = PreActSE50(in_c=args.in_c, num_classes=args.num_classes, r=16)
+    elif args.model_name=='sepreact50':
+        from model.sepreact50 import SEPreAct50
+        net = SEPreAct50(in_c=args.in_c, num_classes=args.num_classes, r=16)
     elif args.model_name=='allcnnc':
         from model.allcnnc import AllCNNC
         net = AllCNNC(in_c=args.in_c, num_classes=args.num_classes)

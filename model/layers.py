@@ -91,10 +91,10 @@ class SEModule(nn.Module):
         return x*out.expand_as(x)
 
 
-class PreActSEBlock(nn.Module):
+class SEPreActBlock(nn.Module):
     """Modified PreAct: relu(bn(x)) is used for skip."""
     def __init__(self, in_c, out_c, k=3, s=1, p=1, bias=False, r=16):
-        super(PreActSEBlock, self).__init__()
+        super(SEPreActBlock, self).__init__()
         self.bn1 = nn.BatchNorm2d(in_c)
         self.conv1 = nn.Conv2d(in_c, out_c, kernel_size=k, stride=s, padding=p, bias=bias)
         self.bn2 = nn.BatchNorm2d(out_c)
@@ -114,9 +114,9 @@ class PreActSEBlock(nn.Module):
 
         return out + self.skip(x)
 
-class PreActSEBottleneck(nn.Module):
+class SEPreActBottleneck(nn.Module):
     def __init__(self, in_c, out_c, k=3, s=1, p=1, bias=False, r=16):
-        super(PreActSEBottleneck, self).__init__()
+        super(SEPreActBottleneck, self).__init__()
         self.bn1 = nn.BatchNorm2d(in_c)
         self.conv1 = nn.Conv2d(in_c, out_c//4, 1, s, 0, bias=bias)
         self.bn2 = nn.BatchNorm2d(out_c//4)
