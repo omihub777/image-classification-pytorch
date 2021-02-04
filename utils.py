@@ -12,6 +12,9 @@ def get_model(args):
     elif args.model_name=='resnet18':
         from model.resnet18 import ResNet18
         net = ResNet18(in_c=args.in_c, num_classes=args.num_classes)
+    elif args.model_name=='allcnnc':
+        from model.allcnnc import AllCNNC
+        net = AllCNNC(in_c=args.in_c, num_classes=args.num_classes)
     else:
         raise NotImplementedError(f"{model_name} is not implemented yet...")
 
