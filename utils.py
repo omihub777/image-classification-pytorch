@@ -9,6 +9,9 @@ def get_model(args):
     elif args.model_name=='preactse18':
         from model.preactse18 import PreActSE18
         net = PreActSE18(in_c=args.in_c, num_classes=args.num_classes, r=16)
+    elif args.model_name=='resnet18':
+        from model.resnet18 import ResNet18
+        net = ResNet18(in_c=args.in_c, num_classes=args.num_classes)
     else:
         raise NotImplementedError(f"{model_name} is not implemented yet...")
 
