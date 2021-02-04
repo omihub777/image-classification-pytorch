@@ -33,7 +33,7 @@ class ResNet18(nn.Module):
         )
 
         self.blc2 = nn.Sequential(
-            ResBlock(64, 64, s=2),
+            ResBlock(64, 64, s=1),
             ResBlock(64, 64)
         )
 

@@ -35,7 +35,7 @@ class PreAct18(nn.Module):
         )
 
         self.blc2 = nn.Sequential(
-            PreActBlock(64, 64, s=2, bias=bias),
+            PreActBlock(64, 64, bias=bias),
             PreActBlock(64, 64, bias=bias)
         )
 
