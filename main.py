@@ -11,7 +11,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--dataset", default="c10", type=str, help="[c10, c100]")
 parser.add_argument("--in-c", default=3, type=int)
 parser.add_argument("--num-classes", default=10, type=int)
-parser.add_argument("--model-name", default="preact18", help="[preact18, preactse18, resnet18, allcnnc]", type=str)
+parser.add_argument("--model-name", default="preact18", help="[preact18, preact34, preactse18, preactse34, resnet18, allcnnc]", type=str)
 parser.add_argument("--batch-size", default=128, type=int)
 parser.add_argument("--eval-batch-size", default=1024, type=int)
 parser.add_argument("--lr", default=1e-1, type=float)
@@ -31,7 +31,6 @@ args.num_workers = 4*args.gpus if args.gpus else 8
 train_ds, test_ds = get_dataset(args)
 train_dl = torch.utils.data.DataLoader(train_ds, batch_size=args.batch_size, shuffle=True, num_workers=args.num_workers, pin_memory=True)
 test_dl = torch.utils.data.DataLoader(test_ds, batch_size=args.eval_batch_size, num_workers=args.num_workers, pin_memory=True)
-
 
 class Net(pl.LightningModule):
     def __init__(self, hparams):
@@ -56,7 +55,6 @@ class Net(pl.LightningModule):
         acc = self.accuracy(out, label)
         self.log("loss", loss)
         self.log("acc", acc)
-
         return loss
 
     def validation_step(self, batch, batch_idx):
@@ -66,7 +64,6 @@ class Net(pl.LightningModule):
         acc = self.accuracy(out, label)
         self.log("val_loss", loss)
         self.log("val_acc", acc)
-        # import IPython ; IPython.embed() ; exit(1)
         return loss
 
 if __name__ == "__main__":
