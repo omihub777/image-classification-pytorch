@@ -38,11 +38,14 @@ class AllCNNC(nn.Module):
         out = self.blc4(out)
         out = self.blc5(out)
         out = self.gap(out)
-        return out
+        return out.flatten(1)
 
 
 if __name__ == "__main__":
     b,c,h,w = 4, 3, 32, 32
     net = AllCNNC(c, 10)
     torchsummary.summary(net, (c,h,w))
+    out = net(torch.randn(b,c,h,w))
+    print(out.shape)
+
 

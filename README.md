@@ -25,10 +25,10 @@ python main.py --api-key [YOUR API KEY OF COMET.ML]
 |Models|CIFAR-10|CIFAR-100|#Params|
 |:--:|:--:|:--:|:--:|
 |[AllCNNC](https://arxiv.org/abs/1412.6806)|-|-|1.4M|
-|[ResNet18](https://arxiv.org/abs/1512.03385)|-|-|11.2M|
-|[PreAct18](https://arxiv.org/abs/1603.05027)|92.995|69.125|11.2M|
+|[ResNet18](https://arxiv.org/abs/1512.03385)|94.465|74.465|11.2M|
+|[PreAct18](https://arxiv.org/abs/1603.05027)|94.575|75.415|11.2M|
 |[PreAct34](https://arxiv.org/abs/1603.05027)|-|-|-|
-|[PreActSE18](https://arxiv.org/abs/1709.01507)|92.980|68.725|11.3M|
+|[PreActSE18](https://arxiv.org/abs/1709.01507)|94.685|76.135|11.3M|
 |[PreActSE34](https://arxiv.org/abs/1709.01507)|-|-|
 |MobV1|-|-|-|
 |MobV2|-|-|-|
@@ -47,10 +47,10 @@ python main.py --api-key [YOUR API KEY OF COMET.ML]
 |Weight Decay| 1e-4|
 
 ## Models
-* All-CNN-C[[Springenberg, J.(ICLRW'15)]](https://arxiv.org/abs/1412.6806)
+* All-CNN-C(+BN)[[Springenberg, J.(ICLRW'15)]](https://arxiv.org/abs/1412.6806)
 * ResNet[[He, K.(CVPR'16)]](https://arxiv.org/abs/1512.03385)
 * PreAct-ResNet[[He, K.(ECCV'16)]](https://arxiv.org/abs/1603.05027)
 * PreAct-ResNet+SEModule[[Hu, J.(CVPR'18)]](https://arxiv.org/abs/1709.01507)
 
 ## Miscellaneous
-* Shape of tensors right before GAP should be $4\times 4$ rather than $2\times 2$. (I think.)
+* Shape of tensors right before GAP should be 4x4 rather than 2x2.
