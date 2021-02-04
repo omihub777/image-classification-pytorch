@@ -26,9 +26,9 @@ python main.py --api-key [YOUR API KEY OF COMET.ML]
 |:--:|:--:|:--:|
 |AllConvC|-|-|
 |[ResNet18](https://arxiv.org/abs/1512.03385)|-|-|
-|[PreAct18](https://arxiv.org/abs/1603.05027)|-|-|
+|[PreAct18](https://arxiv.org/abs/1603.05027)|92.995|69.125|
 |[PreAct34](https://arxiv.org/abs/1603.05027)|-|-|
-|[PreActSE18](https://arxiv.org/abs/1709.01507)|-|-|
+|[PreActSE18](https://arxiv.org/abs/1709.01507)|92.980|68.725|
 |[PreActSE34](https://arxiv.org/abs/1709.01507)|-|-|
 |MobV1|-|-|
 |MobV2|-|-|
