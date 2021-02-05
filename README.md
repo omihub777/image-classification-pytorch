@@ -24,13 +24,13 @@ python main.py --api-key [YOUR API KEY OF COMET.ML]
 
 |Models|CIFAR-10|CIFAR-100|#Params|
 |:--:|:--:|:--:|:--:|
-|[AllCNNC](https://arxiv.org/abs/1412.6806)|93.64|72.04|1.4M|
+|[AllCNNC](https://arxiv.org/abs/1412.6806)|93.640|72.040|1.4M|
 |[ResNet18](https://arxiv.org/abs/1512.03385)|94.465|74.465|11.2M|
 |[PreAct18](https://arxiv.org/abs/1603.05027)|94.575|75.415|11.2M|
-|[PreAct34](https://arxiv.org/abs/1603.05027)|-|-|21.3M|
+|[PreAct34](https://arxiv.org/abs/1603.05027)|95.010|75.715|21.3M|
 |[PreAct50](https://arxiv.org/abs/1603.05027)|-|-|23.5M|
 |[SEPreAct18](https://arxiv.org/abs/1709.01507)|94.685|76.135|11.3M|
-|[SEPreAct34](https://arxiv.org/abs/1709.01507)|-|-|21.4M|
+|[SEPreAct34](https://arxiv.org/abs/1709.01507)|95.000|76.095|21.4M|
 |[SEPreAct50](https://arxiv.org/abs/1709.01507)|-|-|26.0M|
 |MobV1|-|-|-|
 |MobV2|-|-|-|
