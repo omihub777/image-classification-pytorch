@@ -23,6 +23,7 @@ parser.add_argument("--max-epochs", default=200, type=int)
 parser.add_argument("--dry-run", action="store_true")
 parser.add_argument("--weight-decay", default=1e-4, type=float)
 parser.add_argument("--api-key", required=True, help="API Key for Comet.ml")
+parser.add_argument("--precision", default=32, type=int)
 args = parser.parse_args()
 args.benchmark = True if not args.off_benchmark else False
 args.gpus = torch.cuda.device_count()
@@ -76,7 +77,7 @@ if __name__ == "__main__":
     )
     args.api_key = None # Initialize API Key for privacy.
     net = Net(args)
-    trainer = pl.Trainer(fast_dev_run=args.dry_run, gpus=args.gpus, benchmark=args.benchmark, logger=logger, max_epochs=args.max_epochs, weights_summary="full", progress_bar_refresh_rate=0)
+    trainer = pl.Trainer(precision=args.precision,fast_dev_run=args.dry_run, gpus=args.gpus, benchmark=args.benchmark, logger=logger, max_epochs=args.max_epochs, weights_summary="full", progress_bar_refresh_rate=0)
     trainer.fit(model=net, train_dataloader=train_dl, val_dataloaders=test_dl)
     if not args.dry_run:
         model_path = f"weights/{experiment_name}.pth"
