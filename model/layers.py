@@ -140,6 +140,12 @@ class SEPreActBottleneck(nn.Module):
         out = self.se(out)
         return out + self.skip(x)
 
+class DepSepConvBlock(nn.Module):
+    def __init__(self, in_c):
+        ...
+
+    def forward(self, x):
+        ...
 
 if __name__ == "__main__":
     b, c, h, w = 4, 512, 32, 32
