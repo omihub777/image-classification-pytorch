@@ -17,13 +17,13 @@ class SEPreAct50(nn.Module):
             SEPreActBottleneck(256, 256, r=r)
         )
         self.blc3 = nn.Sequential(
-            SEPreActBottleneck(256, 512, r=r),
+            SEPreActBottleneck(256, 512, r=r,s=2),
             SEPreActBottleneck(512, 512, r=r),
             SEPreActBottleneck(512, 512, r=r),
             SEPreActBottleneck(512, 512, r=r),
         )
         self.blc4 = nn.Sequential(
-            SEPreActBottleneck(512, 1024, r=r),
+            SEPreActBottleneck(512, 1024, r=r,s=2),
             SEPreActBottleneck(1024, 1024, r=r),
             SEPreActBottleneck(1024, 1024, r=r),
             SEPreActBottleneck(1024, 1024, r=r),
@@ -31,7 +31,7 @@ class SEPreAct50(nn.Module):
             SEPreActBottleneck(1024, 1024, r=r)
         )
         self.blc5 = nn.Sequential(
-            SEPreActBottleneck(1024, 2048, r=r),
+            SEPreActBottleneck(1024, 2048, r=r,s=2),
             SEPreActBottleneck(2048, 2048, r=r),
             SEPreActBottleneck(2048, 2048, r=r)
         )

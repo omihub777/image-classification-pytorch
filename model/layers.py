@@ -56,9 +56,9 @@ class PreActBottleneck(nn.Module):
     def __init__(self, in_c, out_c, k=3, s=1, p=1, bias=False):
         super(PreActBottleneck, self).__init__()
         self.bn1 = nn.BatchNorm2d(in_c)
-        self.conv1 = nn.Conv2d(in_c, out_c//4, 1, s, 0, bias=bias)
+        self.conv1 = nn.Conv2d(in_c, out_c//4, 1, 1, 0, bias=bias)
         self.bn2 = nn.BatchNorm2d(out_c//4)
-        self.conv2 = nn.Conv2d(out_c//4, out_c//4, 3, 1, 1, bias=bias)
+        self.conv2 = nn.Conv2d(out_c//4, out_c//4, 3, s, 1, bias=bias)
         self.bn3 = nn.BatchNorm2d(out_c//4)
         self.conv3 = nn.Conv2d(out_c//4, out_c, 1, 1, 0, bias=bias)
         
@@ -118,9 +118,9 @@ class SEPreActBottleneck(nn.Module):
     def __init__(self, in_c, out_c, k=3, s=1, p=1, bias=False, r=16):
         super(SEPreActBottleneck, self).__init__()
         self.bn1 = nn.BatchNorm2d(in_c)
-        self.conv1 = nn.Conv2d(in_c, out_c//4, 1, s, 0, bias=bias)
+        self.conv1 = nn.Conv2d(in_c, out_c//4, 1, 1, 0, bias=bias)
         self.bn2 = nn.BatchNorm2d(out_c//4)
-        self.conv2 = nn.Conv2d(out_c//4, out_c//4, 3, 1, 1, bias=bias)
+        self.conv2 = nn.Conv2d(out_c//4, out_c//4, 3, s, 1, bias=bias)
         self.bn3 = nn.BatchNorm2d(out_c//4)
         self.conv3 = nn.Conv2d(out_c//4, out_c, 1, 1, 0, bias=bias)
         

@@ -17,13 +17,13 @@ class PreAct50(nn.Module):
             PreActBottleneck(256, 256)
         )
         self.blc3 = nn.Sequential(
-            PreActBottleneck(256, 512),
+            PreActBottleneck(256, 512,s=2),
             PreActBottleneck(512, 512),
             PreActBottleneck(512, 512),
             PreActBottleneck(512, 512),
         )
         self.blc4 = nn.Sequential(
-            PreActBottleneck(512, 1024),
+            PreActBottleneck(512, 1024,s=2),
             PreActBottleneck(1024, 1024),
             PreActBottleneck(1024, 1024),
             PreActBottleneck(1024, 1024),
@@ -31,7 +31,7 @@ class PreAct50(nn.Module):
             PreActBottleneck(1024, 1024)
         )
         self.blc5 = nn.Sequential(
-            PreActBottleneck(1024, 2048),
+            PreActBottleneck(1024, 2048,s=2),
             PreActBottleneck(2048, 2048),
             PreActBottleneck(2048, 2048)
         )
