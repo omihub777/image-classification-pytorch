@@ -141,11 +141,17 @@ class SEPreActBottleneck(nn.Module):
         return out + self.skip(x)
 
 class DepSepConvBlock(nn.Module):
-    def __init__(self, in_c):
-        ...
+    def __init__(self, in_c, out_c, k=3, s=1, p=1, bias=False):
+        super(DepSepConvBlock, self).__init__()
+        self.dw = nn.Conv2d(in_c, in_c, kernel_size=k, stride=s, padding=p, groups=in_c,bias=bias)
+        self.bn1 = nn.BatchNorm2d(in_c)
+        self.pw = nn.Conv2d(in_c, out_c, kernel_size=1, stride=1, padding=0, bias=bias)
+        self.bn2 = nn.BatchNorm2d(out_c)
 
     def forward(self, x):
-        ...
+        out = F.relu(self.bn1(self.dw(x)))
+        out = F.relu(self.bn2(self.pw(out)))
+        return out
 
 if __name__ == "__main__":
     b, c, h, w = 4, 512, 32, 32

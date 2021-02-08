@@ -49,8 +49,6 @@ python main.py --api-key [YOUR API KEY OF COMET.ML]
 |LR Decay Rate| 0.1|
 |Weight Decay| 1e-4|
 
-* PreAct50/SEPreAct50 are trained with BS:64 and LR:0.05 (follow linear scaling rule.)
-
 ## Models
 * All-CNN-C(+BN)[[Springenberg, J.(ICLRW'15)]](https://arxiv.org/abs/1412.6806)
 * ResNet[[He, K.(CVPR'16)]](https://arxiv.org/abs/1512.03385)
