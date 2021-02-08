@@ -31,7 +31,7 @@ python main.py --api-key [YOUR API KEY OF COMET.ML]
 |[PreAct50](https://arxiv.org/abs/1603.05027)|94.970|76.685|23.5M|
 |[SEPreAct18](https://arxiv.org/abs/1709.01507)|94.685|76.135|11.3M|
 |[SEPreAct34](https://arxiv.org/abs/1709.01507)|95.000|76.095|21.4M|
-|[SEPreAct50](https://arxiv.org/abs/1709.01507)|-|-|26.0M|
+|[SEPreAct50](https://arxiv.org/abs/1709.01507)|95.075|77.615|26.0M|
 |[MobV1](https://arxiv.org/abs/1704.04861)|-|-|-|
 |MobV2|-|-|-|
 |MNasNet|-|-|-|
