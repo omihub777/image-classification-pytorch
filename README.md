@@ -29,11 +29,14 @@ python main.py --api-key [YOUR API KEY OF COMET.ML]
 |[PreAct18](https://arxiv.org/abs/1603.05027)|94.575|75.415|11.2M|
 |[PreAct34](https://arxiv.org/abs/1603.05027)|95.010|75.715|21.3M|
 |[PreAct50](https://arxiv.org/abs/1603.05027)|94.970|76.685|23.5M|
+|PreAct-ResNeXt50|-|-|-|
 |[SEPreAct18](https://arxiv.org/abs/1709.01507)|94.685|76.135|11.3M|
 |[SEPreAct34](https://arxiv.org/abs/1709.01507)|95.000|76.095|21.4M|
 |[SEPreAct50](https://arxiv.org/abs/1709.01507)|95.075|77.615|26.0M|
-|[MobV1](https://arxiv.org/abs/1704.04861)|-|-|-|
-|MobV2|-|-|-|
+|SEPreAct-ResNeXt50|-|-|-|
+|[MobV1](https://arxiv.org/abs/1704.04861)|94.000|75.250|3.2M|
+|[MobV2](https://arxiv.org/abs/1801.04381)|-|-|-|
+|MobV3|-|-|-|
 |MNasNet|-|-|-|
 |EfficientNetB0|-|-|-|
 
@@ -55,6 +58,7 @@ python main.py --api-key [YOUR API KEY OF COMET.ML]
 * PreAct-ResNet[[He, K.(ECCV'16)]](https://arxiv.org/abs/1603.05027)
 * PreAct-ResNet+SEModule[[Hu, J.(CVPR'18)]](https://arxiv.org/abs/1709.01507)
 * MobileNetV1[[Howard, A.(2017)]](https://arxiv.org/abs/1704.04861)
+* MobileNetV2[[Sandler, M.(CVPR'18)]](https://arxiv.org/abs/1801.04381)
 
 ## Miscellaneous
 * Spatial dimensions of tensors right before GAP should be 4x4 rather than 2x2.
