@@ -6,12 +6,11 @@ import pytorch_lightning as pl
 
 from utils import get_model, get_dataset
 import argparse
-# 
 parser = argparse.ArgumentParser()
 parser.add_argument("--dataset", default="c10", type=str, help="[c10, c100]")
 parser.add_argument("--in-c", default=3, type=int)
 parser.add_argument("--num-classes", default=10, type=int)
-parser.add_argument("--model-name", default="preact18", help="[preact18, preact34, preact50, sepreact18, sepreact34, sepreact50, resnet18, allcnnc, mobv1]", type=str)
+parser.add_argument("--model-name", default="preact18", help="[preact18, preact34, preact50, sepreact18, sepreact34, sepreact50, resnet18, allcnnc, mobv1, mobv2]", type=str)
 parser.add_argument("--batch-size", default=128, type=int)
 parser.add_argument("--eval-batch-size", default=1024, type=int)
 parser.add_argument("--lr", default=1e-1, type=float)

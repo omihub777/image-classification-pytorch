@@ -153,9 +153,30 @@ class DepSepConvBlock(nn.Module):
         out = F.relu(self.bn2(self.pw(out)))
         return out
 
+class InvBottleneck(nn.Module):
+    def __init__(self, in_c, out_c, k=3, s=1, p=1, bias=False, expansion=6):
+        super(InvBottleneck, self).__init__()
+        self.skip = s==1 and in_c==out_c
+        h_c = in_c*expansion
+        self.pw1 = nn.Conv2d(in_c, h_c, kernel_size=1, stride=1, padding=0, bias=bias)
+        self.bn1 = nn.BatchNorm2d(h_c)
+        self.dw = nn.Conv2d(h_c, h_c, kernel_size=k, stride=s, padding=p, bias=bias, groups=in_c)
+        self.bn2 = nn.BatchNorm2d(h_c)
+        self.pw2 = nn.Conv2d(h_c, out_c, kernel_size=1, stride=1, padding=0, bias=bias)
+        self.bn3 = nn.BatchNorm2d(out_c)
+
+    def forward(self, x):
+        out = F.relu6(self.bn1(self.pw1(x)))
+        out = F.relu6(self.bn2(self.dw(out)))
+        out = self.bn3(self.pw2(out))
+        if self.skip:
+            out = out+x
+        return out
+
 if __name__ == "__main__":
     b, c, h, w = 4, 512, 32, 32
     x = torch.randn(b, c, h, w)
-    n = PreActBottleneck(c, 1024, s=2)
+    # n = PreActBottleneck(c, 1024, s=2)
+    n = InvBottleneck(c, 1024, s=1)
     torchsummary.summary(n, (c, h, w))
     print(n(x).shape)
