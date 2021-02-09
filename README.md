@@ -35,8 +35,8 @@ python main.py --api-key [YOUR API KEY OF COMET.ML]
 |[SEPreAct50](https://arxiv.org/abs/1709.01507)|95.075|77.615|26.0M|
 |SEPreAct-ResNeXt50|-|-|-|
 |[MobV1](https://arxiv.org/abs/1704.04861)|94.000|75.250|3.2M|
-|[MobV2](https://arxiv.org/abs/1801.04381)|-|-|-|
-|MobV3|-|-|-|
+|[MobV2](https://arxiv.org/abs/1801.04381)|94.605|75.670|2.6M|
+|[MobV3](https://arxiv.org/abs/1905.02244)|-|-|-|
 |MNasNet|-|-|-|
 |EfficientNetB0|-|-|-|
 
@@ -59,6 +59,7 @@ python main.py --api-key [YOUR API KEY OF COMET.ML]
 * PreAct-ResNet+SEModule[[Hu, J.(CVPR'18)]](https://arxiv.org/abs/1709.01507)
 * MobileNetV1[[Howard, A.(2017)]](https://arxiv.org/abs/1704.04861)
 * MobileNetV2[[Sandler, M.(CVPR'18)]](https://arxiv.org/abs/1801.04381)
+* MobileNetV3[[Howard, A.(ICCV'19)]](https://arxiv.org/abs/1905.02244)
 
 ## Miscellaneous
 * Spatial dimensions of tensors right before GAP should be 4x4 rather than 2x2.
