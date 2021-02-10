@@ -33,6 +33,9 @@ def get_model(args):
     elif args.model_name=='mobv2':
         from model.mobv2 import MobileNetV2
         net = MobileNetV2(in_c=args.in_c, num_classes=args.num_classes)    
+    elif args.model_name=='mobv3':
+        from model.mobv3 import MobileNetV3
+        net = MobileNetV3(in_c=args.in_c, num_classes=args.num_classes)    
     else:
         raise NotImplementedError(f"{model_name} is not implemented yet...")
 

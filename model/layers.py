@@ -175,11 +175,65 @@ class InvBottleneck(nn.Module):
             out = out+x
         return out
 
+class HSEModule(nn.Module):
+    def __init__(self, in_c, r=4):
+        """using Hard Sigmoid for the activation in the last layer of Excitation."""
+        super(HSEModule, self).__init__()
+        hidden = in_c//r
+        self.gap = nn.AdaptiveAvgPool2d(1)
+        self.fc1 = nn.Conv2d(in_c, hidden, kernel_size=1)
+        self.fc2 = nn.Conv2d(hidden, in_c, kernel_size=1)
+
+    def forward(self, x):
+        out = self.gap(x)
+        out = F.relu(self.fc1(out))
+        out = F.hardsigmoid(self.fc2(out))
+        return x*out.expand_as(x)
+
+
+class SEInvBottleneck(nn.Module):
+    def __init__(self, in_c,h_c, out_c,k=3, s=1,p=1, bias=False, act='relu', se=False, r=4):
+        """
+        Args:
+            act: 'relu' or 'hswish'
+            se: whether use SE block or not
+        """
+        super(SEInvBottleneck, self).__init__()
+        self.pw1 = nn.Conv2d(in_c, h_c, kernel_size=1, bias=bias)
+        self.bn1 = nn.BatchNorm2d(h_c)
+        self.dw = nn.Conv2d(h_c, h_c, kernel_size=k, stride=s, padding=p, groups=h_c,bias=bias)
+        self.bn2 = nn.BatchNorm2d(h_c)
+
+        if se:
+            self.se = HSEModule(h_c, r=r)
+        else:
+            self.se = nn.Sequential()
+        self.pw2 = nn.Conv2d(h_c, out_c, kernel_size=1, bias=bias)
+        self.bn3 = nn.BatchNorm2d(out_c)
+
+        self.skip = in_c==out_c and s==1
+
+        if act=='relu':
+            self.act = nn.ReLU(True)
+        elif act=='hswish':
+            self.act = nn.Hardswish(True) 
+        else:
+            raise ValueError(f"{act}")
+
+    def forward(self, x):
+        out = self.act(self.bn1(self.pw1(x)))
+        out = self.act(self.bn2(self.dw(out)))
+        out = self.se(out)
+        out = self.bn3(self.pw2(out))
+        if self.skip:
+            out = out+x
+        return out
+
 
 if __name__ == "__main__":
-    b, c, h, w = 4, 512, 32, 32
+    b, c, h, w = 4, 160, 32, 32
     x = torch.randn(b, c, h, w)
     # n = PreActBottleneck(c, 1024, s=2)
-    n = InvBottleneck(c, 1024, s=1)
+    n = SEInvBottleneck(in_c=160, h_c=960, out_c=160, k=5, s=1,p=2, se=True, act='hswish')
     torchsummary.summary(n, (c, h, w))
     print(n(x).shape)
