@@ -86,3 +86,11 @@ def get_dataset(args):
         raise NotImplementedError(f"{args.dataset} is not implemented yet.")
     
     return train_ds, test_ds
+
+def get_experiment_name(args):
+    if args.model_name=="wrn":
+        model_name = f"{args.model_name}{args.l}_{args.widen}"
+    else:
+        model_name = args.model_name
+    experiment_name = f"{model_name}_{args.dataset}"
+    return experiment_name

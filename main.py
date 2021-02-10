@@ -4,7 +4,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import pytorch_lightning as pl
 
-from utils import get_model, get_dataset
+from utils import get_model, get_dataset, get_experiment_name
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("--dataset", default="c10", type=str, help="[c10, c100]")
@@ -69,7 +69,8 @@ class Net(pl.LightningModule):
         return loss
 
 if __name__ == "__main__":
-    experiment_name = f"{args.model_name}_{args.dataset}"
+    experiment_name = get_experiment_name(args)
+    print(experiment_name)
     logger = pl.loggers.CometLogger(
         api_key=args.api_key,
         save_dir="log",
