@@ -2,6 +2,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torchsummary
+import sys, os
+sys.path.append(os.path.abspath("model"))
 
 class ConvBlock(nn.Module):
     def __init__(self, in_c, out_c,k=3,s=1,p=1, bias=False):
@@ -172,6 +174,7 @@ class InvBottleneck(nn.Module):
         if self.skip:
             out = out+x
         return out
+
 
 if __name__ == "__main__":
     b, c, h, w = 4, 512, 32, 32
