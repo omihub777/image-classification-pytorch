@@ -229,11 +229,35 @@ class SEInvBottleneck(nn.Module):
             out = out+x
         return out
 
+class WideResBlock(nn.Module):
+    def __init__(self, in_c, out_c, k=3, s=1, p=1, bias=False, dropout_rate=0.3):
+        super(WideResBlock, self).__init__()
+        self.dropout_rate = dropout_rate
+        self.bn1 = nn.BatchNorm2d(in_c)
+        self.conv1 = nn.Conv2d(in_c, out_c, kernel_size=k, stride=s, padding=p, bias=bias)
+        self.bn2 = nn.BatchNorm2d(out_c)
+        self.conv2 = nn.Conv2d(out_c, out_c, kernel_size=k, stride=1, padding=p, bias=bias)
+
+        if in_c!=out_c or s!=1:
+            self.skip = nn.Conv2d(in_c, out_c, kernel_size=1, stride=s, bias=False)
+        else:
+            self.skip = nn.Sequential()
+
+    def forward(self, x):
+        x = F.relu(self.bn1(x))
+        out = F.dropout(self.conv1(x), self.dropout_rate, training=self.training)
+        out = self.conv2(F.relu(self.bn2(out)))
+        return out + self.skip(x)
+
+
+
 
 if __name__ == "__main__":
-    b, c, h, w = 4, 160, 32, 32
+    b, c, h, w = 4, 3, 32, 32
     x = torch.randn(b, c, h, w)
     # n = PreActBottleneck(c, 1024, s=2)
-    n = SEInvBottleneck(in_c=160, h_c=960, out_c=160, k=5, s=1,p=2, se=True, act='hswish')
+    # n = SEInvBottleneck(in_c=160, h_c=960, out_c=160, k=5, s=1,p=2, se=True, act='hswish')
+    widen=8
+    n = WideResBlock(c, 16*widen)
     torchsummary.summary(n, (c, h, w))
     print(n(x).shape)

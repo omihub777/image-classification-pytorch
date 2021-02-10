@@ -23,6 +23,8 @@ parser.add_argument("--dry-run", action="store_true")
 parser.add_argument("--weight-decay", default=1e-4, type=float)
 parser.add_argument("--api-key", required=True, help="API Key for Comet.ml")
 parser.add_argument("--precision", default=32, type=int)
+parser.add_argument("--l", default=22, type=int, help='Number of layers for WRN')
+parser.add_argument("--widen", default=10, type=int, help='Widen factor for WRN')
 args = parser.parse_args()
 args.benchmark = True if not args.off_benchmark else False
 args.gpus = torch.cuda.device_count()
