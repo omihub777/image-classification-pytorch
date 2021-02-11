@@ -245,8 +245,10 @@ class WideResBlock(nn.Module):
 
     def forward(self, x):
         x = F.relu(self.bn1(x))
-        out = F.dropout(self.conv1(x), self.dropout_rate, training=self.training)
-        out = self.conv2(F.relu(self.bn2(out)))
+        out = self.conv1(x)
+        out = F.relu(self.bn2(out))
+        out = F.dropout(out, self.dropout_rate, training=self.training)
+        out = self.conv2(out)
         return out + self.skip(x)
 
 

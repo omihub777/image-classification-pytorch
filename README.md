@@ -70,3 +70,5 @@ python main.py --api-key [YOUR API KEY OF COMET.ML]
 
 ## Miscellaneous
 * Spatial dimensions of tensors right before GAP should be 4x4 rather than 2x2.
+* No bias term for Squeeze-and-Excitation Module.
+* 
