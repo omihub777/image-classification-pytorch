@@ -4,13 +4,15 @@ import torch.nn.functional as F
 import torchsummary
 import sys,os
 sys.path.append(os.path.abspath("model"))
-from layers import ConvBlock, InvBottleneck
+from layers import InvBottleneck
 
 class MobileNetV2(nn.Module):
     def __init__(self, in_c, num_classes):
         super(MobileNetV2, self).__init__()
         self.blc1 = nn.Sequential(
-            ConvBlock(in_c, 32),
+            nn.Conv2d(in_c, 32, kernel_size=3, stride=1, padding=1, bias=False),
+            nn.BatchNorm2d(32),
+            nn.ReLU6(True)
         )
         self.blc2 = nn.Sequential(
             InvBottleneck(32, 16, expansion=1),
@@ -54,7 +56,7 @@ class MobileNetV2(nn.Module):
         return out.flatten(1)
 
 if __name__ == "__main__":
-    b, c, h, w = 4, 3, 32, 32
+    b, c, h, w = 4, 3, 224, 224
     x = torch.randn(b, c, h, w)
     n = MobileNetV2(c, 10)
     out = n(x)
