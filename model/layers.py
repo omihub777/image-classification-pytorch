@@ -162,7 +162,7 @@ class InvBottleneck(nn.Module):
         h_c = in_c*expansion
         self.pw1 = nn.Conv2d(in_c, h_c, kernel_size=1, stride=1, padding=0, bias=bias)
         self.bn1 = nn.BatchNorm2d(h_c)
-        self.dw = nn.Conv2d(h_c, h_c, kernel_size=k, stride=s, padding=p, bias=bias, groups=in_c)
+        self.dw = nn.Conv2d(h_c, h_c, kernel_size=k, stride=s, padding=p, bias=bias, groups=h_c)
         self.bn2 = nn.BatchNorm2d(h_c)
         self.pw2 = nn.Conv2d(h_c, out_c, kernel_size=1, stride=1, padding=0, bias=bias)
         self.bn3 = nn.BatchNorm2d(out_c)
