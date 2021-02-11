@@ -83,8 +83,8 @@ class SEModule(nn.Module):
         super(SEModule, self).__init__()
         hidden = in_c//r
         self.gap = nn.AdaptiveAvgPool2d(1)
-        self.fc1 = nn.Conv2d(in_c, hidden, kernel_size=1)
-        self.fc2 = nn.Conv2d(hidden, in_c, kernel_size=1)
+        self.fc1 = nn.Conv2d(in_c, hidden, kernel_size=1, bias=False)
+        self.fc2 = nn.Conv2d(hidden, in_c, kernel_size=1, bias=False)
 
     def forward(self, x):
         out = self.gap(x)
@@ -181,8 +181,8 @@ class HSEModule(nn.Module):
         super(HSEModule, self).__init__()
         hidden = in_c//r
         self.gap = nn.AdaptiveAvgPool2d(1)
-        self.fc1 = nn.Conv2d(in_c, hidden, kernel_size=1)
-        self.fc2 = nn.Conv2d(hidden, in_c, kernel_size=1)
+        self.fc1 = nn.Conv2d(in_c, hidden, kernel_size=1, bias=False)
+        self.fc2 = nn.Conv2d(hidden, in_c, kernel_size=1, bias=False)
 
     def forward(self, x):
         out = self.gap(x)

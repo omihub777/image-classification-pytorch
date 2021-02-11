@@ -18,6 +18,9 @@ python main.py --api-key [YOUR API KEY OF COMET.ML]
 
 ## Version
 * Python: 3.6.9
+* PyTorch: 1.7.1
+* PyTorch-Lightning: 1.1.6
+* Comet-ml: 3.3.1
 
 
 ## Results(Accuracy)
@@ -34,16 +37,16 @@ python main.py --api-key [YOUR API KEY OF COMET.ML]
 |[SEPreAct34](https://arxiv.org/abs/1709.01507)|*95.000*|76.095|21.4M|
 |[SEPreAct50](https://arxiv.org/abs/1709.01507)|**95.075**|**77.615**|26.0M|
 |SEPreAct-ResNeXt50|-|-|-|
-|[WRN22-8](https://arxiv.org/abs/1605.07146)|-|-|17.2M|
+|[WRN22-8](https://arxiv.org/abs/1605.07146)|94.470|-|17.2M|
 |[MobV1](https://arxiv.org/abs/1704.04861)|94.000|75.250|3.2M|
 |[MobV2](https://arxiv.org/abs/1801.04381)|94.605|75.670|2.6M|
-|[MobV3](https://arxiv.org/abs/1905.02244)|-|-|4.2M|
+|[MobV3](https://arxiv.org/abs/1905.02244)|93.980|75.430|4.2M|
 |MNasNet|-|-|-|
 |EfficientNetB0|-|-|-|
 
 * Did experiments 2 times and report the averaged best accuracy.
-* **bold** indicates 1st place.
-* *italic* indicates 2nd place.
+* Apply "Random Crop + Horizontal Flip + Normalization" as Data Augmentation.
+* **bold** and *italic* indicates **1st** and *2nd* place.
 
 ## Hyperparameters
 |Params|Values|
