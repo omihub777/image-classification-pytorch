@@ -230,13 +230,18 @@ class SEInvBottleneck(nn.Module):
         return out
 
 class WideResBlock(nn.Module):
-    def __init__(self, in_c, out_c, k=3, s=1, p=1, bias=False, dropout_rate=0.3):
+    def __init__(self, in_c, out_c, k=3, s=1, p=1, bias=False, dropout_rate=0.3, se=False, r=4):
         super(WideResBlock, self).__init__()
         self.dropout_rate = dropout_rate
         self.bn1 = nn.BatchNorm2d(in_c)
         self.conv1 = nn.Conv2d(in_c, out_c, kernel_size=k, stride=s, padding=p, bias=bias)
         self.bn2 = nn.BatchNorm2d(out_c)
         self.conv2 = nn.Conv2d(out_c, out_c, kernel_size=k, stride=1, padding=p, bias=bias)
+
+        if se:
+            self.se = SEModule(out_c, r=r)
+        else:
+            self.se = nn.Sequential()
 
         if in_c!=out_c or s!=1:
             self.skip = nn.Conv2d(in_c, out_c, kernel_size=1, stride=s, bias=False)
@@ -246,12 +251,27 @@ class WideResBlock(nn.Module):
     def forward(self, x):
         x = F.relu(self.bn1(x))
         out = self.conv1(x)
-        out = F.relu(self.bn2(out))
-        out = F.dropout(out, self.dropout_rate, training=self.training)
+        out = F.dropout(F.relu(self.bn2(out)), self.dropout_rate, training=self.training)
         out = self.conv2(out)
+        out = self.se(out)
         return out + self.skip(x)
 
 
+class PreActResNeXtBottleneck(nn.Module):
+    """Bottleneck for PreAct-ResNeXt"""
+    def __init__(self, in_c, out_c, k=3, s=1, p=1,bias=False, cardinality=32, dimension=4):
+        super(ResNeXtBottleneck, self).__init__()
+        h_c = cardinality*dimension
+        self.bn1 = nn.BatchNorm2d(in_c)
+        self.conv1 = nn.Conv2d(in_c, h_c, kernel_size=1, bias=bias)
+        self.bn2 = nn.BatchNorm2d(h_c)
+        self.conv2 = nn.Conv2d(h_c, h_c, kernel_size=k, s=s, p=p, bias=bias,  groups=cardinality)
+        self.bn3 = nn.BatchNorm2d(h_c)
+        self.conv3 = nn.Conv2d(h_c, out_c, kernel_size=1, bias=bias)
+
+
+    def forward(self, x):
+        ...
 
 
 if __name__ == "__main__":

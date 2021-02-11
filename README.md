@@ -38,6 +38,7 @@ python main.py --api-key [YOUR API KEY OF COMET.ML]
 |[SEPreAct50](https://arxiv.org/abs/1709.01507)|**95.075**|**77.615**|26.0M|
 |SEPreAct-ResNeXt50|-|-|-|
 |[WRN22-8](https://arxiv.org/abs/1605.07146)|94.470|75.990|17.2M|
+|[SEWRN22-8](https://arxiv.org/abs/1605.07146)|-|-|17.3M|
 |[MobV1](https://arxiv.org/abs/1704.04861)|94.000|75.250|3.2M|
 |[MobV2](https://arxiv.org/abs/1801.04381)|94.605|75.670|2.2M|
 |[MobV3](https://arxiv.org/abs/1905.02244)|93.980|75.430|4.2M|
@@ -70,5 +71,5 @@ python main.py --api-key [YOUR API KEY OF COMET.ML]
 
 ## Miscellaneous
 * Spatial dimensions of tensors right before GAP should be 4x4 rather than 2x2.
-* No bias term for Squeeze-and-Excitation Module.
-* 
+* No bias term used for Squeeze-and-Excitation Module.
+* Use dropout right after activation.(in WRN, at least.)

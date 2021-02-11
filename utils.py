@@ -39,6 +39,9 @@ def get_model(args):
     elif args.model_name=='wrn':
         from model.wrn import WideResNet
         net = WideResNet(in_c=args.in_c, num_classes=args.num_classes, l=args.l, widen=args.widen)
+    elif args.model_name=='sewrn':
+        from model.wrn import WideResNet
+        net = WideResNet(in_c=args.in_c, num_classes=args.num_classes, l=args.l, widen=args.widen, se=True, r=16)
     else:
         raise NotImplementedError(f"{model_name} is not implemented yet...")
 
