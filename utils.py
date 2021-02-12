@@ -42,6 +42,12 @@ def get_model(args):
     elif args.model_name=='sewrn':
         from model.wrn import WideResNet
         net = WideResNet(in_c=args.in_c, num_classes=args.num_classes, l=args.l, widen=args.widen, se=True, r=16)
+    elif args.model_name=='preact_resnext50':
+        from model.preact_resnext50 import PreActResNeXt50
+        net = PreActResNeXt50(in_c=args.in_c, num_classes=args.num_classes, se=False)
+    elif args.model_name=='sepreact_resnext50':
+        from model.preact_resnext50 import PreActResNeXt50
+        net = PreActResNeXt50(in_c=args.in_c, num_classes=args.num_classes, se=True, r=16)
     else:
         raise NotImplementedError(f"{model_name} is not implemented yet...")
 
@@ -91,7 +97,7 @@ def get_dataset(args):
     return train_ds, test_ds
 
 def get_experiment_name(args):
-    if args.model_name=="wrn":
+    if "wrn" in args.model_name:
         model_name = f"{args.model_name}{args.l}_{args.widen}"
     else:
         model_name = args.model_name

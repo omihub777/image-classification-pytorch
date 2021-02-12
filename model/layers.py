@@ -259,27 +259,44 @@ class WideResBlock(nn.Module):
 
 class PreActResNeXtBottleneck(nn.Module):
     """Bottleneck for PreAct-ResNeXt"""
-    def __init__(self, in_c, out_c, k=3, s=1, p=1,bias=False, cardinality=32, dimension=4):
-        super(ResNeXtBottleneck, self).__init__()
-        h_c = cardinality*dimension
+    def __init__(self, in_c, out_c, k=3, s=1, p=1,bias=False, cardinality=32, dimension=4, se=False, r=16):
+        super(PreActResNeXtBottleneck, self).__init__()
+        expansion = 2
+        h_c = int(out_c//expansion)
         self.bn1 = nn.BatchNorm2d(in_c)
         self.conv1 = nn.Conv2d(in_c, h_c, kernel_size=1, bias=bias)
         self.bn2 = nn.BatchNorm2d(h_c)
-        self.conv2 = nn.Conv2d(h_c, h_c, kernel_size=k, s=s, p=p, bias=bias,  groups=cardinality)
+        self.conv2 = nn.Conv2d(h_c, h_c, kernel_size=k, stride=s, padding=p, bias=bias,  groups=cardinality)
         self.bn3 = nn.BatchNorm2d(h_c)
         self.conv3 = nn.Conv2d(h_c, out_c, kernel_size=1, bias=bias)
 
+        if se:
+            self.se = SEModule(out_c, r=r)
+        else:
+            self.se = nn.Sequential()
+
+        if in_c!=out_c or s!=1:
+            self.skip = nn.Conv2d(in_c, out_c, kernel_size=1, stride=s, bias=False)
+        else:
+            self.skip = nn.Sequential()
 
     def forward(self, x):
-        ...
+        x = F.relu(self.bn1(x))
+        out = self.conv1(x)
+        out = self.conv2(F.relu(self.bn2(out)))
+        out = self.conv3(F.relu(self.bn3(out)))
+        out = self.se(out)
+
+        return out + self.skip(x)
 
 
 if __name__ == "__main__":
-    b, c, h, w = 4, 3, 32, 32
+    b, c, h, w = 4, 128, 32, 32
     x = torch.randn(b, c, h, w)
     # n = PreActBottleneck(c, 1024, s=2)
     # n = SEInvBottleneck(in_c=160, h_c=960, out_c=160, k=5, s=1,p=2, se=True, act='hswish')
-    widen=8
-    n = WideResBlock(c, 16*widen)
+    # widen=8
+    # n = WideResBlock(c, 16*widen)
+    n = PreActResNeXtBottleneck(c, 128, se=False, s=2)
     torchsummary.summary(n, (c, h, w))
     print(n(x).shape)
