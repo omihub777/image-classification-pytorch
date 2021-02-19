@@ -33,14 +33,14 @@ python main.py --api-key [YOUR API KEY OF COMET.ML]
 |[PreAct18](https://arxiv.org/abs/1603.05027)|94.575|75.415|11.2M|
 |[PreAct34](https://arxiv.org/abs/1603.05027)|95.010|75.715|21.3M|
 |[PreAct50](https://arxiv.org/abs/1603.05027)|94.970|76.685|23.5M|
-|PreAct-ResNeXt50|-|-|23.0M|
+|[WRN22-8](https://arxiv.org/abs/1605.07146)|95.080|77.775|17.2M|
+|[PreAct-ResNeXt50](https://arxiv.org/abs/1611.05431)|94.950|78.315|23.0M|
 |DenseNet|-|-|-|
 |[SEPreAct18](https://arxiv.org/abs/1709.01507)|94.685|76.135|11.3M|
 |[SEPreAct34](https://arxiv.org/abs/1709.01507)|95.000|76.095|21.4M|
 |[SEPreAct50](https://arxiv.org/abs/1709.01507)|95.075|77.615|26.0M|
-|SEPreAct-ResNeXt50|-|-|25.5M|
-|[WRN22-8](https://arxiv.org/abs/1605.07146)|95.080|77.775|17.2M|
-|[SEWRN22-8](https://arxiv.org/abs/1605.07146)|95.530|77.830|17.3M|
+|[SEWRN22-8](https://arxiv.org/abs/1709.01507)|**95.530**|*77.830*|17.3M|
+|[SEPreAct-ResNeXt50](https://arxiv.org/abs/1709.01507)|*95.160*|**78.520**|25.5M|
 |[MobV1](https://arxiv.org/abs/1704.04861)|94.000|75.250|3.2M|
 |[MobV2](https://arxiv.org/abs/1801.04381)|94.085|75.425|2.2M|
 |[MobV3](https://arxiv.org/abs/1905.02244)|93.980|75.430|4.2M|
@@ -49,7 +49,7 @@ python main.py --api-key [YOUR API KEY OF COMET.ML]
 
 * Did experiments 2 times and report the averaged best accuracy.
 * Apply "Random Crop + Horizontal Flip + Normalization" as Data Augmentation.
-<!-- * **bold** and *italic* indicates **1st** and *2nd* place. -->
+* **bold** and *italic* indicates **1st** and *2nd* place.
 
 ## Hyperparameters
 |Params|Values|
@@ -70,6 +70,7 @@ python main.py --api-key [YOUR API KEY OF COMET.ML]
 * ResNet[[He, K.(CVPR'16)]](https://arxiv.org/abs/1512.03385)
 * PreAct-ResNet[[He, K.(ECCV'16)]](https://arxiv.org/abs/1603.05027)
 * WideResNet[[Zagoruyko, S.(BMVC'16)]](https://arxiv.org/abs/1605.07146)
+* ResNeXt[[Xie, S.(CVPR'17)]](https://arxiv.org/abs/1611.05431)
 * SENet[[Hu, J.(CVPR'18)]](https://arxiv.org/abs/1709.01507)
 * MobileNetV1[[Howard, A.(2017)]](https://arxiv.org/abs/1704.04861)
 * MobileNetV2[[Sandler, M.(CVPR'18)]](https://arxiv.org/abs/1801.04381)
